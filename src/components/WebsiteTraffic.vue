@@ -2,8 +2,9 @@
   <div style="position: relative">
     <v-container fill-height fluid grid-list-md>
       <v-layout wrap>
-        <v-flex s5 md5 lg5>
-          <time-selector />
+        <v-flex s12 md12 lg12>
+          <time-selector :queryStartDate="startDatetime" :queryEndDate="endDatetime" 
+                         @startDateChange="startDateChange"  @endDateChange ="endDateChange" />
         </v-flex>
         <v-flex
           md12
@@ -15,10 +16,10 @@
         <v-flex md12 lg12 style="position: relative; top: -20px">
           <traffic-trend-time />
         </v-flex>
-        <v-flex md6 lg6 style="position: relative; top: 0px">
+        <v-flex md12 lg12 style="position: relative; top: 0px">
           <function-traffic />
         </v-flex>
-        <v-flex md6 lg6 style="position: relative; top: 0px">
+        <v-flex md12 lg12 style="position: relative; top: 0px">
           <layer-traffic />
         </v-flex>
       </v-layout>
@@ -33,6 +34,12 @@ import FunctionTraffic from "./WebsiteTrafficComponents/function-traffic.vue";
 import LayerTraffic from "./WebsiteTrafficComponents/layer-traffic.vue";
 import TrafficSumSat from "./WebsiteTrafficComponents/traffic-sum-sat.vue";
 export default {
+  data() {
+    return {
+      startDatetime: null,
+      endDatetime: null
+    }
+  },
   components: {
     TimeSelector,
     TrafficSumSat,
@@ -40,6 +47,16 @@ export default {
     FunctionTraffic,
     LayerTraffic,
   },
+  methods: {
+    startDateChange(value) {
+      this.startDatetime = value;
+      alert(this.startDatetime);
+    },
+    endDateChange(value) {
+      this.endDatetime = value;
+      alert(this.endDatetime);
+    }
+  }
 };
 </script>
 
