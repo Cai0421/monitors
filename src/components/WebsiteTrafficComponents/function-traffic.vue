@@ -41,18 +41,6 @@
         </v-btn>
       </div>
     </div>
-
-    <!--<v-data-table
-        class="vdatatable"
-        light
-        :headers="headers"
-        :items="items"
-        locale="zh-ch"
-        hide-actions
-        rowsPerPageText="每页条数"
-        no-data-text="无"
-        :pagination.sync="pagination1"
-      >-->
     <v-data-table
       class="vdatatable"
       light
@@ -60,6 +48,9 @@
       hide-actions
       rowsPerPageText="每页条数"
       no-data-text="无"
+      :headers="headers"
+      :items="items"
+      :pagination.sync="pagination"
     >
       <template slot="headerCell" slot-scope="{ header }">
         <span
@@ -90,7 +81,48 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['queryStartDate','queryEndDate'],
+  data() {
+    return {
+      headers: [
+        {
+          sortable: false,
+          text: "序号",
+          value: "index",
+          align: "center",
+        },
+        {
+          sortable: false,
+          text: "功能",
+          value: "function",
+          align: "center",
+        },
+        {
+          sortable: true,
+          text: "总访问量",
+          value: "frequency",
+          align: "center",
+        },
+        {
+          sortable: true,
+          text: "来源",
+          value: "source",
+          align: "center",
+        },
+      ],
+      pagination: { sortBy: "frequency", descending: true, rowsPerPage: 5 },
+      items: [],
+      startQueryDatetime: '',
+      endQueryDatetime: ''
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      
+    })
+  }
+};
 </script>
 
 <style>

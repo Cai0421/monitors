@@ -122,16 +122,16 @@
 //import VueDatepickerLocal from "vue-datepicker-local"
 export default {
   props: {
-    queryStartDate: String,
-    queryEndDate: String
+    // queryStartDatetime: String,
+    // queryEndDatetime: String
   },
   data(){
     return {
       queryDateRegion: "", //查询的时间区间
       datepickerStart: new Date().toISOString().substring(0,10), //datepicker bind two date
       datepickerEnd: new Date().toISOString().substring(0,10),
-      //queryStartDate:  "",
-      //queryEndDate: "", //query date start to end
+      queryStartDate:  "",
+      queryEndDate: "", //query date start to end
       queryDateRange: "",
       isShowDialog: false,
       selectTimeTypeToggle: -1,
@@ -144,7 +144,9 @@ export default {
     this.$nextTick(() => {
       this.isShowDialog = false;
       this.selectTimeTypeToggle = 1;
-      
+      // this.queryStartDate = this.queryStartDatetime;
+      // this.queryEndDate = this.queryEndDatetime;
+
       let d = new Date();
       this.queryStartDate = d.toLocaleDateString();
       d = d.setDate(d.getDate() + 1);
@@ -215,8 +217,10 @@ export default {
   watch: {
     queryStartDate() {
       this.$emit('startDateChange', this.queryStartDate);
+      this.$emit('endDateChange', this.queryEndDate);
     },
     queryEndDate() {
+      this.$emit('startDateChange', this.queryStartDate);
       this.$emit('endDateChange', this.queryEndDate);
     }
   }
